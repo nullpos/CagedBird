@@ -5,7 +5,6 @@ page.open('https://mobile.twitter.com/login', function(status) {
         console.log("Unable to load url.");
         phantom.exit();
     }
-    page.render("1.png");
     console.log('login...');
     page.evaluate(function() {
         document.getElementById("session[username_or_email]").value = "";
@@ -24,7 +23,6 @@ function logined() {
             phantom.exit();
         }
         console.log('fetch follower requests');
-        page.render("2.png");
         var forms = page.evaluate(function() {
             return document.forms;
         });
