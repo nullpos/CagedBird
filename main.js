@@ -11,11 +11,11 @@ page.open('https://mobile.twitter.com/login', function(status) {
         document.getElementById("session[password]").value = "";
         document.forms[0].submit();
     });
-    page.onLoadFinished = logined
+    page.onLoadFinished = loggedIn
 });
 
-function logined() {
-    console.log('logined.');
+function loggedIn() {
+    console.log('logged in.');
     page.onLoadFinished = null;
     page.open('https://mobile.twitter.com/follower_requests', function(status) {
         if(status !== "success") {
