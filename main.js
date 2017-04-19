@@ -27,7 +27,7 @@ function loggedIn() {
     page.onLoadFinished = null;
     page.open('https://mobile.twitter.com/follower_requests', function(status) {
         if(status !== "success") {
-            console.log("Unable to load follower requests page.");
+            console.log("Unable to open follower requests page.");
             phantom.exit();
         }
         console.log('Fetching follower requests.');
