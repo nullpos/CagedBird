@@ -23,7 +23,7 @@ page.open('https://mobile.twitter.com/login', function(status) {
         document.getElementById("session[password]").value = "";
         document.forms[0].submit();
     });
-    page.onLoadFinished = loggedIn
+    page.onLoadFinished = loggedIn;
 });
 
 function loggedIn() {
@@ -98,8 +98,8 @@ function approve(next) {
             } else if(whitelist.length === 0 && blacklist.length !== 0) {
                 // deny in blacklist, nop others
                 if(blacklist[0] === "all") {
-                    forms[i].submit();
-                    return {"approve": true, "username": username};
+                    forms[i+1].submit();
+                    return {"approve": false, "username": username};
                 } else if(blacklist.indexOf(username) !== -1) {
                     forms[i+1].submit();
                     return {"approve": false, "username": username};
@@ -108,6 +108,13 @@ function approve(next) {
                 }
             } else if(whitelist.length !== 0 && blacklist.length !== 0) {
                 // approve whitelist and deny blacklist, nop others
+                if(blacklist[0] === "all") {
+                    forms[i+1].submit();
+                    return {"approve": false, "username": username};
+                } else if(whitelist[0] === "all") {
+                    forms[i].submit();
+                    return {"approve": true, "username": username};
+                }
                 if(blacklist.indexOf(username) !== -1) {
                     forms[i+1].submit();
                     return {"approve": false, "username": username};
